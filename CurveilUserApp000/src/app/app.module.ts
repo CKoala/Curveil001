@@ -13,18 +13,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from 'AngularFire2';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-
-export const firebaseConfig = {
-apiKey: "AIzaSyCCrYipra2oP91goMAR1v68UPwqca9nJwM",
-authDomain: "curveil001-f3d30.firebaseapp.com",
-databaseURL: "https://curveil001-f3d30.firebaseio.com",
-projectId: "curveil001-f3d30",
-storageBucket: "curveil001-f3d30.appspot.com",
-messagingSenderId: "736002705697"
-};
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
 declarations: [
@@ -38,9 +29,9 @@ declarations: [
 imports: [
   BrowserModule,
   IonicModule.forRoot(MyApp),
-  AngularFireModule.initializeApp(firebaseConfig),
-  HttpModule,
-  HttpClientModule
+  AngularFireModule.initializeApp(environment.firebase),
+  AngularFireDatabaseModule,
+  AngularFireAuthModule
 ],
 bootstrap: [IonicApp],
 entryComponents: [
@@ -55,8 +46,7 @@ providers: [
   StatusBar,
   SplashScreen,
   {provide: ErrorHandler, useClass: IonicErrorHandler},
-  AngularFireModule ,
-  AngularFirestore
+  AngularFireModule
 ]
 })
 export class AppModule {}
